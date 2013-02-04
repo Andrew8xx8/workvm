@@ -1,0 +1,3 @@
+#!/bin/bash
+exec 2>&1
+exec /usr/local/rvm/bin/rvm 'ruby-1.9.3-p194' exec runit-man -m readwrite --rackup='rainbows -c rainbows.conf -p 14500 -E production' -u "commersant:QutRkgdS9zEvIy5hyiH7MyjWG" -a "/etc/service" -f "/etc/sv" -l "svlogd"
