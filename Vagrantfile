@@ -12,7 +12,6 @@ Vagrant::Config.run do |config|
     #config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
     config.vm.share_folder "v-root", "/vagrant", "."
     config.vm.share_folder "projects", "~/projects", "~/projects"
-    config.vm.share_folder "dotfiles", "~/.zshkit", "~/.zshkit"
 
     host_user_id = Process.euid
     host_group_id = Process.egid
@@ -20,6 +19,10 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
+
+    chef.add_recipe('chef-locales::default')
+
+    #chef.add_recipe('oh-my-zsh::default')
 
     chef.add_recipe('rvm::vagrant')
     chef.add_recipe('rvm::user')

@@ -11,7 +11,13 @@ cookbook 'xml'
 cookbook 'zlib'
 cookbook 'mysql'
 cookbook 'postgresql'
-cookbook 'database'
+cookbook 'database',
+  :git => 'git://github.com/axsuul/cookbook-database.git'
+cookbook 'oh-my-zsh',
+  :git => 'git://github.com/streamlinesocial/chef-oh-my-zsh.git'
+cookbook 'chef-locales',
+  :git => 'git://github.com/pyrat/chef-locales.git'
+
 cookbook 'phantomjs'
 
 cookbook 'rvm',

@@ -7,13 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "git"
+
 package 'imagemagick'
 package 'nginx'
 package 'htop'
-
-gem_package 'thin'
-gem_package 'rainbows'
-gem_package 'sendfile'
+package 'vim'
 
 postgresql_connexion = { :host     => 'localhost',
                          :username => 'postgres',
@@ -22,5 +21,22 @@ postgresql_connexion = { :host     => 'localhost',
 postgresql_database_user 'vagrant' do
   connection postgresql_connexion
   password 'vagrant'
+  role_attributes :superuser => true, :createdb => true
   action :create
+end
+
+# Append default Display (99.0) in bashrc
+template "/etc/bash.bashrc" do
+  owner "root"
+  group "root"
+  mode 0755
+  source "bash.bashrc"
+  action :create_if_missing
+end
+
+template "/home/vagrant/.gitconfig" do
+  source "git.erb"
+  owner "vagrant"
+  group "vagrant"
+  action :create_if_missing
 end
