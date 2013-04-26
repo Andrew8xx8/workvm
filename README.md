@@ -4,6 +4,16 @@
 
 Simply include `recipe[workvm::default]`.
 
+Define attributes
+```ruby
+ workvm: {
+   user:      'vagrant',
+   home:      '/home/vagrant',
+   fullname:  'Andrew Kulakov',
+   email:     'avk@8xx8.ru'
+ }
+```
+
 ## Attributes
 
 <table>
