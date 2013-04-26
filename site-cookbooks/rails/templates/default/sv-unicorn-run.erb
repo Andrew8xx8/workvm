@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-exec 2>&1
-
-rvm_path=/usr/local/rvm chpst -u <%= @options[:user] %>:<%= @options[:group] %> /usr/local/rvm/bin/rvm-shell 'ruby-1.9.3-p194' -c 'cd /u/apps/ulway/current && bundle exec unicorn_rails -c /u/apps/ulway/current/config/unicorn.rb -E <%= @options[:env] %>'

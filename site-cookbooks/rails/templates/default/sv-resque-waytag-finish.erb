@@ -1,6 +1,0 @@
-#!/bin/bash
-
-HOME=/u/apps/<%= @options[:app] %>/current/
-cd $HOME
-kill -9 `cat tmp/pids/resque_worker_QUEUE.pid`
-rm -f tmp/pids/resque_worker_QUEUE.pid

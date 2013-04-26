@@ -1,9 +1,0 @@
-#!/bin/sh
-exec 2>&1
-
-DIR=<%= @options[:app] %>
-export rvm_path=/usr/local/rvm
-export rvm_ignore_rvmrc=1
-export HOME=/home/<%= @options[:user] %>
-cd $DIR
-RAILS_ENV=<%= @options[:env] %> chpst -u <%= @options[:user] %>:<%= @options[:user] %> $rvm_path/bin/rvm 1.9.3 do ruby <%= @options[:daemon] %>
