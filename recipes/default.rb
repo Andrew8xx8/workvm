@@ -8,12 +8,30 @@ end
   include_recipe requirement
 end
 
+dotfiles_dir = "#{node[:workvm][:home]}/.dotfiles"
+
 execute "Download .dotfiles" do
-  command "git clone git@github.com:Andrew8xx8/dotfiles.git ~/.dotfiles"
+  user node[:workvm][:user]
+  group node[:workvm][:user]
+
+  command "git clone https://github.com/Andrew8xx8/dotfiles.git #{node[:workvm][:home]}/.dotfiles"
+  not_if { ::File.exists?("#{dotfiles_dir}/.git") }
 end
 
-execute "Install .dotfiles" do
-  command "cd ~/.dotfiles && rake install[#{node[:workvm][:email]},#{node[:workvm][:fullname]}]"
+execute "Updating .dotfiles" do
+  user node[:workvm][:user]
+  group node[:workvm][:user]
+
+  command "cd #{node[:workvm][:home]}/.dotfiles && git pull --force"
+  only_if { ::File.exists?("#{dotfiles_dir}/.git") }
+end
+
+rvm_shell "Install .dotfiles" do
+  ruby_string node[:workvm][:ruby]
+  user        node[:workvm][:user]
+  group       node[:workvm][:user]
+  cwd         dotfiles_dir
+  code        %{rake install[#{node[:workvm][:email]},#{node[:workvm][:fullname]}]}
 end
 
 execute "change shell" do

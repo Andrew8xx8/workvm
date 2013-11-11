@@ -5,6 +5,7 @@
 Simply include `recipe[workvm::default]`.
 
 Define attributes
+
 ```ruby
  workvm: {
    user:      'vagrant',
@@ -38,7 +39,7 @@ Define attributes
     <td>User email for git config.</td>
   </tr>
   <tr>
-    <td>ssh_shared_folder</td>
-    <td>Shared folder with ssh public and private keys</td>
+    <td>ruby</td>
+    <td>Ruby string for RVM (default 2.0.0)</td>
   </tr>
 </table>
