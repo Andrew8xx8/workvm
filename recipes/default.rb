@@ -8,9 +8,12 @@ end
   include_recipe requirement
 end
 
-execute "Install .dotfiles" do
+execute "Download .dotfiles" do
   command "git clone git@github.com:Andrew8xx8/dotfiles.git ~/.dotfiles"
-  command "cd ~/.dotfiles && rake install"
+end
+
+execute "Install .dotfiles" do
+  command "cd ~/.dotfiles && rake install[#{node[:workvm][:email]},#{node[:workvm][:fullname]}]"
 end
 
 execute "change shell" do
